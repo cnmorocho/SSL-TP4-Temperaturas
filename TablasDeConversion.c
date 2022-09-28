@@ -1,37 +1,36 @@
 #include <stdio.h>
 #include "./dependencies/Conversion.h"
 
+void tablaDeConversion(double t_min, double t_max, char init_scale) {
+  double current_t = t_min;
+  double t_converted;
+  /* 
+    Si es 'c': Celsius -> Farenheit
+    Si es 'f': Farenheit -> Celsius 
+  */
+  if (init_scale == 'c') {
+    printf("Celsius || Farenheit\n");
+    for(current_t; current_t <= t_max; current_t++){
+      t_converted = farenheit(current_t);
+      printf("%.1f°C || %.1f°F \n", current_t, t_converted);
+    }
+  } else if (init_scale == 'f') {
+    printf("Farenheit || Celsius\n");
+    for(current_t; current_t <= t_max; current_t++){
+      t_converted = celsius(current_t);
+      printf("%.1f°F || %.1f°C \n", current_t, t_converted);
+    }
+  }
+}
+
 int main()
 {
 
-  double t_celsius = 0, t_farenheit;
-  double t_max = 200;
+  tablaDeConversion(0, 200, 'c');
 
-  // * Tabla de Celsius a Farenheit
+  printf("\n============================\n");
 
-  printf("Celsius\tFarenheit\n");
-  while (t_celsius <= t_max)
-  {
-    t_farenheit = farenheit(t_celsius);
-    printf("%.2f \t %.2f \n", t_celsius, t_farenheit);
-    t_celsius += 1;
-  }
-
-  printf("========================");
-  printf("\n\n");
-  // TODO: Habría que hacer una función generica para no repetir lógica
-
-  // * Tabla de Farenheit a Celsius
-
-  t_farenheit = 32;
-  t_max = 392;
-  printf("Farenheit\tCelsius\n");
-  while (t_farenheit <= t_max)
-  {
-    t_celsius = celsius(t_farenheit);
-    printf("%.2f \t %.2f \n", t_farenheit, t_celsius);
-    t_farenheit += 1;
-  }
+  tablaDeConversion(0, 200, 'f');
 
   return 0;
 }
